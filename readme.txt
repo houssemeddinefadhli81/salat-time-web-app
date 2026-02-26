@@ -6,7 +6,7 @@ KAIROS is a modern and stylish app landing page free website template. It has al
 need that will help you showcase your app. 
 Its impressive banner, call-to-action buttons, video 
 support, testimonial slider, pricing section, and overall design will definitely help you present 
-your app in a way that will surely impress your visitors and potential app users. Kairos is also 
+your app in a way that will surely impress your visitors and potential app users. Salat Time is also 
 built with clean and organized code making it easy to customize. It is also mobile and retina 
 ready so you can be sure that your site looks great on any devices from mobile to desktop and 
 on any screen resolutions.
