@@ -5,6 +5,7 @@
     <title>reCAPTCHA v2 Demo</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>
+
   <body>
     <div
       class="g-recaptcha"
@@ -14,8 +15,17 @@
 
     <script>
       function onRecaptchaSuccess(token) {
-        window.postMessage({type: 'recaptcha', token: token}, '*');
-      }      
+        console.log("Recaptcha token:", token);
+
+        // send token to Flutter
+        window.postMessage(
+          JSON.stringify({
+            type: "recaptcha",
+            token: token
+          }),
+          "*"
+        );
+      }
     </script>
   </body>
 </html>
