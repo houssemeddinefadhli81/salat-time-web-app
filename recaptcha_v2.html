@@ -15,31 +15,22 @@
 </div>
 
 <script>
+function sendTokenToFlutter(token) {
+  if (window.flutter_inappwebview) {
+    window.flutter_inappwebview.callHandler('recaptchaToken', token);
+  } else {
+    setTimeout(() => sendTokenToFlutter(token), 100);
+  }
+}
 
-let bridgeReady = false;
-
-// Flutter bridge ready event
 window.addEventListener("flutterInAppWebViewPlatformReady", function() {
-  bridgeReady = true;
+  console.log("Flutter bridge ready");
 });
 
 function onRecaptchaSuccess(token) {
-
   console.log("Recaptcha token:", token);
-
-  function sendToken() {
-
-    if (bridgeReady && window.flutter_inappwebview) {
-      window.flutter_inappwebview.callHandler('recaptchaToken', token);
-    } else {
-      setTimeout(sendToken, 100);
-    }
-
-  }
-
-  sendToken();
+  sendTokenToFlutter(token);
 }
-
 </script>
 
 </body>
