@@ -15,20 +15,31 @@
 </div>
 
 <script>
+
+let bridgeReady = false;
+
+// Flutter bridge ready event
+window.addEventListener("flutterInAppWebViewPlatformReady", function() {
+  bridgeReady = true;
+});
+
 function onRecaptchaSuccess(token) {
 
   console.log("Recaptcha token:", token);
 
   function sendToken() {
-    if (window.flutter_inappwebview) {
+
+    if (bridgeReady && window.flutter_inappwebview) {
       window.flutter_inappwebview.callHandler('recaptchaToken', token);
     } else {
-      setTimeout(sendToken, 50);
+      setTimeout(sendToken, 100);
     }
+
   }
 
   sendToken();
 }
+
 </script>
 
 </body>
