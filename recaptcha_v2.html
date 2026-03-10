@@ -1,31 +1,35 @@
 <!doctype html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>reCAPTCHA v2 Demo</title>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <title>reCAPTCHA v2 Demo</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
 
-  <body>
-    <div
-      class="g-recaptcha"
-      data-sitekey="6Lf5t4UsAAAAAKlfoyT4Uf5YY82gVmASFg9uhiS6"
-      data-callback="onRecaptchaSuccess"
-    ></div>
+<body>
 
-    <script>
-      function onRecaptchaSuccess(token) {
-        console.log("Recaptcha token:", token);
+<div
+  class="g-recaptcha"
+  data-sitekey="6Lf5t4UsAAAAAKlfoyT4Uf5YY82gVmASFg9uhiS6"
+  data-callback="onRecaptchaSuccess">
+</div>
 
-        // send token to Flutter
-        window.postMessage(
-          JSON.stringify({
-            type: "recaptcha",
-            token: token
-          }),
-          "*"
-        );
-      }
-    </script>
-  </body>
+<script>
+function onRecaptchaSuccess(token) {
+
+  console.log("Recaptcha token:", token);
+
+  function sendToken() {
+    if (window.flutter_inappwebview) {
+      window.flutter_inappwebview.callHandler('recaptchaToken', token);
+    } else {
+      setTimeout(sendToken, 50);
+    }
+  }
+
+  sendToken();
+}
+</script>
+
+</body>
 </html>
